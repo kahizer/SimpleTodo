@@ -4,7 +4,7 @@ SimpleTodo is an android app that allows building a todo list and basic todo ite
 
 Submitted by: Jose Villanueva
 
-Time spent: 3.5 hours spent in total
+Time spent: 10 hours spent in total
 
 ## User Stories
 
@@ -17,15 +17,16 @@ The following **required** functionality is completed:
 The following **optional** features are implemented:
 
 * [ ] Persist the todo items [into SQLite](http://guides.codepath.com/android/Persisting-Data-to-the-Device#sqlite) instead of a text file
-* [ ] Improve style of the todo items in the list [using a custom adapter](http://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView)
-* [ ] Add support for completion due dates for todo items (and display within listview item)
+* [X ] Improve style of the todo items in the list [using a custom adapter](http://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView)
+* [X ] Add support for completion due dates for todo items (and display within listview item)
 * [ ] Use a [DialogFragment](http://guides.codepath.com/android/Using-DialogFragment) instead of new Activity for editing items
-* [ ] Add support for selecting the priority of each todo item (and display in listview item)
-* [ ] Tweak the style improving the UI / UX, play with colors, images or backgrounds
+* [X] Add support for selecting the priority of each todo item (and display in listview item)
+* [X ] Tweak the style improving the UI / UX, play with colors, images or backgrounds
 
 The following **additional** features are implemented:
 
 * [X] "Cancel" button was added on edit activity form to discard changes.
+* [X] Itmes will grayout once they are marked as "DONE" to easily differentiate between items that needs to be done and those that are done.
 
 ## Video Walkthrough 
 
@@ -38,6 +39,9 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 ## Notes
 
 Describe any challenges encountered while building the app.
+It takes extra work to pass an object between activities but once Parcelable is implemented things get easier.
+The ui manipulation doesnt always work/respond the way is suposed to gravity doesnt seem to work on some ui elements.
+Correct sizing of ui elements.
 
 ## License
 
