@@ -22,6 +22,10 @@
         <activity
             android:name=".EditItemActivity"
             android:label="@string/title_activity_edit_item"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NewTaskFormActivity"
+            android:label="@string/title_activity_new_task_form"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

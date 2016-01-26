@@ -2,4 +2,14 @@
     <string name="app_name">SimpleTodo</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_edit_item">EditItemActivity</string>
+    <string name="title_activity_new_task_form">NewTaskFormActivity</string>
+    <string-array name="priority_items">
+        <item>HIGH</item>
+        <item>MEDIUM</item>
+        <item>LOW</item>
+    </string-array>
+    <string-array name="status_items">
+        <item>TO-DO</item>
+        <item>DONE</item>
+    </string-array>
 </resources>
