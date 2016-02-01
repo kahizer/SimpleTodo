@@ -18,6 +18,8 @@ public class NewTaskFormActivity extends AppCompatActivity {
     TaskViewModel currentTask;
     String method;
     int position;
+    Date currentCreatedDate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +38,18 @@ public class NewTaskFormActivity extends AppCompatActivity {
             this.position = getIntent().getIntExtra("position", 0);
             currentTask = b.getParcelable("TaskViewModel");
 
+            this.currentCreatedDate = currentTask.createdDate;
+
             EditText taskNameET = (EditText) findViewById(R.id.etTaskName);
             taskNameET.setText(currentTask.tittle);
 
-//            EditText dueDateET = (EditText) findViewById(R.id.etDueDate);
-//            String dueData = dueDateET.getText().toString();
+            DatePicker datePicker = (DatePicker) findViewById(R.id.dpDate);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(currentTask.dueDate);
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            datePicker.updateDate(year, month, day);
 
             EditText detailsET = (EditText) findViewById(R.id.etDetails);
             detailsET.setText(currentTask.description);
@@ -120,7 +129,18 @@ public class NewTaskFormActivity extends AppCompatActivity {
         Spinner statusSp = (Spinner) findViewById(R.id.spStatus);
         String status = statusSp.getSelectedItem().toString();
 
-        TaskViewModel newTask = new TaskViewModel(taskName, deatils, priority, status, date);
+        Date createdDate = new Date();
+        switch (this.method){
+            case "edit":
+                createdDate = this.currentCreatedDate;
+                break;
+
+            case "new":
+                createdDate = new Date();
+                break;
+        }
+
+        TaskViewModel newTask = new TaskViewModel(taskName, deatils, priority, status, date, createdDate);
         Bundle abstractData = new Bundle();
         abstractData.putParcelable("TaskViewModel", newTask);
 

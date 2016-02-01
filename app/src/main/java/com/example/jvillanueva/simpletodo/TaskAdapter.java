@@ -34,14 +34,18 @@ public class TaskAdapter extends ArrayAdapter<TaskViewModel> {
                 switch (task.priority){
                     case "HIGH":
                         tvPriority.setTextColor(Color.RED);
+                        tvTitle.setTextColor(Color.BLACK);
+
                         break;
 
                     case "MEDIUM":
                         tvPriority.setTextColor(Color.YELLOW);
+                        tvTitle.setTextColor(Color.BLACK);
                         break;
 
                     case "LOW":
                         tvPriority.setTextColor(Color.BLUE);
+                        tvTitle.setTextColor(Color.BLACK);
                         break;
                 }
                 break;

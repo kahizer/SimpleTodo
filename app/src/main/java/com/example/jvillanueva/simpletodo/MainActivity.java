@@ -11,18 +11,17 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
     //    ArrayList<String> items;
 //    ArrayAdapter<String> itemsAdapter;
 //    ListView lvItems;
+
+    TodoTaskDatabaseAdapter todoTaskDatabaseAdapter;
     ListView lvItems;
     TaskAdapter adapter;
     ArrayList<TaskViewModel> arrayOfTasks;
-    private final int REQUEST_CODE = 20;
-    private final int RESULT_OK = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,19 +30,24 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        todoTaskDatabaseAdapter = new TodoTaskDatabaseAdapter(this);
+        //SQLiteDatabase sqLiteDatabase = todoTaskDatabaseAdapter.getWritableDatabase();
+        //ActiveAndroid.initialize(this);
+
         arrayOfTasks = new ArrayList<TaskViewModel>();
         adapter = new TaskAdapter(this, arrayOfTasks);
         lvItems = (ListView) findViewById(R.id.lvItems);
         lvItems.setAdapter(adapter);
 
-        TaskViewModel newTask00 = new TaskViewModel("Task 01", "Trying out new task", "HIGH", "TO-DO", new Date());
-        TaskViewModel newTask01 = new TaskViewModel("Task 02", "Trying out new task", "MEDIUM", "TO-DO", new Date());
-        TaskViewModel newTask02 = new TaskViewModel("Task 03", "Trying out new task", "LOW", "TO-DO", new Date());
-        TaskViewModel newTask03 = new TaskViewModel("Task 04", "Trying out new task", "LOW", "TO-DO", new Date());
-        adapter.add(newTask00);
-        adapter.add(newTask01);
-        adapter.add(newTask02);
-        adapter.add(newTask03);
+//        TaskViewModel newTask00 = new TaskViewModel("Task 01", "Trying out new task", "HIGH", "TO-DO", new Date(), new Date());
+//        TaskViewModel newTask01 = new TaskViewModel("Task 02", "Trying out new task", "MEDIUM", "TO-DO", new Date(), new Date());
+//        TaskViewModel newTask02 = new TaskViewModel("Task 03", "Trying out new task", "LOW", "TO-DO", new Date(), new Date());
+//        TaskViewModel newTask03 = new TaskViewModel("Task 04", "Trying out new task", "LOW", "TO-DO", new Date(), new Date());
+//
+//        adapter.add(newTask00);
+//        adapter.add(newTask01);
+//        adapter.add(newTask02);
+//        adapter.add(newTask03);
 
 //        lvItems = (ListView) findViewById(R.id.lvItems);
 //        readItems();
@@ -100,6 +104,16 @@ public class MainActivity extends AppCompatActivity {
                     case "new":
                         adapter.add(task);
                         adapter.notifyDataSetChanged();
+
+                        TodoTaskDatabaseAdapter dbHelper = new TodoTaskDatabaseAdapter(this);
+
+                        long id = dbHelper.insertData(task);
+                        if(id < 0){
+                            Message.message(this, "Unsuccessful");
+                        }else {
+                            Message.message(this, "Successfull");
+                        }
+
                         break;
 
                     case "edit":
@@ -134,6 +148,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onItemLongClick(AdapterView<?> adapter1, View item, int pos, long id) {
                         arrayOfTasks.remove(pos);
+//                        TaskViewModel currentTask = arrayOfTasks.get(pos);
+//                        currentTask.delete();
                         adapter.notifyDataSetChanged();
                         writeItems();
                         return true;
